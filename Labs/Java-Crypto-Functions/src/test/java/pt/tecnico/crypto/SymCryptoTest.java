@@ -2,10 +2,8 @@ package pt.tecnico.crypto;
 
 import static javax.xml.bind.DatatypeConverter.printHexBinary;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static java.util.stream.IntStream.range;
-
 import java.security.Key;
-
+import java.security.SecureRandom;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.IvParameterSpec;
@@ -24,7 +22,7 @@ public class SymCryptoTest {
 	/**
 	 * Symmetric cipher: combination of algorithm, block processing, and padding.
 	 */
-	private static final String SYM_CIPHER = "AES/ECB/PKCS5Padding";
+	private static final String SYM_CIPHER = "AES/CBC/PKCS5Padding";
 
 	/**
 	 * Secret key cryptography test.
@@ -53,16 +51,15 @@ public class SymCryptoTest {
 		// get a AES cipher object and print the provider
 		Cipher cipher = Cipher.getInstance(SYM_CIPHER);
 		System.out.println(cipher.getProvider().getInfo());
-		
-		IvParameterSpec iv = null;
-		if (SYM_CIPHER.contains("CBC")) {
-			iv = cipher.getParameters().getParameterSpec(IvParameterSpec.class);
-		}
+
+        byte[] iv = new byte[SYM_KEY_SIZE / 8];
+        new SecureRandom().nextBytes(iv);
+        IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
 
 		// encrypt using the key and the plain text
 		System.out.println("Ciphering...");
 		if (SYM_CIPHER.contains("CBC")) 
-			cipher.init(Cipher.ENCRYPT_MODE, key, iv);
+			cipher.init(Cipher.ENCRYPT_MODE, key, ivParameterSpec);
 		else
 			cipher.init(Cipher.ENCRYPT_MODE, key);
 		byte[] cipherBytes = cipher.doFinal(plainBytes);
@@ -79,10 +76,7 @@ public class SymCryptoTest {
 		
 		// decipher the cipher text using the same key
 		System.out.println("Deciphering...");
-		if (SYM_CIPHER.contains("CBC"))
-			cipher.init(Cipher.DECRYPT_MODE, key, iv);
-		else
-			cipher.init(Cipher.DECRYPT_MODE, key);
+        cipher.init(Cipher.DECRYPT_MODE, key, ivParameterSpec);
 
 		byte[] newPlainBytes = cipher.doFinal(cipherBytes);
 		System.out.print("Result 0: ");

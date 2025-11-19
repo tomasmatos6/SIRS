@@ -1,7 +1,6 @@
 package pt.ulisboa.tecnico.meic.sirs;
 
 import java.security.Key;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 

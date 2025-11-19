@@ -159,6 +159,14 @@
 							<mainClass>pt.ulisboa.tecnico.meic.sirs.RSAKeyGenerator</mainClass>
 							<name>rsa-key-gen</name>
 						</program>
+                        <program>
+                            <mainClass>pt.ulisboa.tecnico.meic.sirs.ImageRSACipher</mainClass>
+                            <name>image-rsa-cipher</name>
+                        </program>
+                        <program>
+                            <mainClass>pt.ulisboa.tecnico.meic.sirs.ImageRSADecipher</mainClass>
+                            <name>image-rsa-decipher</name>
+                        </program>
 					</programs>
 				</configuration>
 			</plugin>
