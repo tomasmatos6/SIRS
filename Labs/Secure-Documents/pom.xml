@@ -28,7 +28,7 @@
 
 		<!-- application properties - can be overriden in command line with -D -->
 		<p>pt.tecnico</p>
-		<c>JsonExample</c>
+		<c>LocalSecureDocs</c>
 		<mainclass>${p}.${c}</mainclass>
 		<!-- arguments are defined in exec plugin -->
 	</properties>

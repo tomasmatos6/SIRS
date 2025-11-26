@@ -1,0 +1,3 @@
+[submodule "CivicEcho"]
+	path = CivicEcho
+	url = git@github.com:tecnico-sec/T19-CivicEcho.git

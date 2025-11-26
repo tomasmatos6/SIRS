@@ -3,7 +3,6 @@ package pt.tecnico.crypto;
 import static javax.xml.bind.DatatypeConverter.printHexBinary;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.nio.ByteBuffer;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
